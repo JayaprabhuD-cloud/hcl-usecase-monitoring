@@ -1,0 +1,9 @@
+resource "aws_cloudtrail" "main" {
+  name                          = var.cloudtrail_name
+  s3_bucket_name                = var.cloudtrail_bucket_name
+  cloud_watch_logs_group_arn    = var.log_group_arn
+  cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_role.arn
+  include_global_service_events = true
+  is_multi_region_trail         = true
+  enable_log_file_validation    = true
+}
