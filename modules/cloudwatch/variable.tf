@@ -6,7 +6,7 @@ variable "cloudtrail_log_group_name" {
 
 variable "sns_topic_arn" {
   description = "sns topic arn variable"
-  type = list(string)
+  type = string
 }
 
 variable "retention" {

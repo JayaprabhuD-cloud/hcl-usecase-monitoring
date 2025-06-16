@@ -18,7 +18,7 @@ variable "retention" {
 
 variable "sns_topic_arn" {
   description = "sns topic arn variable"
-  type = list(string)
+  type = string
 }
 
 variable "sns_topic_name" {
