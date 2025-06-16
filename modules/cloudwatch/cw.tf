@@ -42,22 +42,23 @@ resource "aws_iam_role_policy" "cloudtrail_policy" {
 
 locals {
   metrics = [
-    { name = "RootUsage", pattern = "{ $.userIdentity.type = "Root" }" },
-    { name = "IAMPolicyChanges", pattern = "{ ($.eventName = "PutUserPolicy") || ($.eventName = "PutGroupPolicy") || ($.eventName = "PutRolePolicy") || ($.eventName = "DeleteUserPolicy") || ($.eventName = "DeleteGroupPolicy") || ($.eventName = "DeleteRolePolicy") || ($.eventName = "CreatePolicy") || ($.eventName = "DeletePolicy") || ($.eventName = "CreatePolicyVersion") || ($.eventName = "DeletePolicyVersion") || ($.eventName = "AttachRolePolicy") || ($.eventName = "DetachRolePolicy") || ($.eventName = "AttachUserPolicy") || ($.eventName = "DetachUserPolicy") || ($.eventName = "AttachGroupPolicy") || ($.eventName = "DetachGroupPolicy") }" },
-    { name = "CloudTrailChanges", pattern = "{ ($.eventName = "StopLogging") || ($.eventName = "DeleteTrail") }" },
-    { name = "ConsoleLoginFailures", pattern = "{ ($.eventName = "ConsoleLogin") && ($.errorMessage = "Failed authentication") }" },
-    { name = "UnauthorizedAPICalls", pattern = "{ $.errorCode = "*UnauthorizedOperation" || $.errorCode = "AccessDenied*" }" },
-    { name = "SecurityGroupChanges", pattern = "{ ($.eventName = "AuthorizeSecurityGroupIngress") || ($.eventName = "AuthorizeSecurityGroupEgress") || ($.eventName = "RevokeSecurityGroupIngress") || ($.eventName = "RevokeSecurityGroupEgress") }" },
-    { name = "NetworkACLChanges", pattern = "{ ($.eventName = "CreateNetworkAcl") || ($.eventName = "CreateNetworkAclEntry") || ($.eventName = "DeleteNetworkAcl") || ($.eventName = "DeleteNetworkAclEntry") || ($.eventName = "ReplaceNetworkAclEntry") || ($.eventName = "ReplaceNetworkAclAssociation") }" },
-    { name = "NetworkGatewayChanges", pattern = "{ ($.eventName = "CreateCustomerGateway") || ($.eventName = "DeleteCustomerGateway") || ($.eventName = "AttachInternetGateway") || ($.eventName = "CreateInternetGateway") || ($.eventName = "DeleteInternetGateway") || ($.eventName = "DetachInternetGateway") }" },
-    { name = "RouteTableChanges", pattern = "{ ($.eventName = "CreateRouteTable") || ($.eventName = "DeleteRouteTable") || ($.eventName = "ReplaceRouteTableAssociation") || ($.eventName = "CreateRoute") || ($.eventName = "ReplaceRoute") || ($.eventName = "DeleteRoute") }" },
-    { name = "VpcChanges", pattern = "{ ($.eventName = "CreateVpc") || ($.eventName = "DeleteVpc") || ($.eventName = "ModifyVpcAttribute") || ($.eventName = "AcceptVpcPeeringConnection") || ($.eventName = "CreateVpcPeeringConnection") || ($.eventName = "DeleteVpcPeeringConnection") }" },
-    { name = "EC2InstanceChanges", pattern = "{ ($.eventName = "RunInstances") || ($.eventName = "TerminateInstances") || ($.eventName = "StopInstances") || ($.eventName = "StartInstances") }" },
-    { name = "KMSKeyChanges", pattern = "{ ($.eventSource = "kms.amazonaws.com") && (($.eventName = "DisableKey") || ($.eventName = "ScheduleKeyDeletion")) }" },
-    { name = "S3BucketPolicyChanges", pattern = "{ ($.eventName = "PutBucketPolicy") || ($.eventName = "DeleteBucketPolicy") }" },
-    { name = "AWSConfigChanges", pattern = "{ ($.eventSource = "config.amazonaws.com") && (($.eventName = "StopConfigurationRecorder") || ($.eventName = "DeleteDeliveryChannel")) }" }
+    { name = "RootUsage", pattern = "{ $.userIdentity.type = \\\"Root\\\" }" },
+    { name = "IAMPolicyChanges", pattern = "{ ($.eventName = \\\"PutUserPolicy\\\") || ($.eventName = \\\"PutGroupPolicy\\\") || ($.eventName = \\\"PutRolePolicy\\\") || ($.eventName = \\\"DeleteUserPolicy\\\") || ($.eventName = \\\"DeleteGroupPolicy\\\") || ($.eventName = \\\"DeleteRolePolicy\\\") || ($.eventName = \\\"CreatePolicy\\\") || ($.eventName = \\\"DeletePolicy\\\") || ($.eventName = \\\"CreatePolicyVersion\\\") || ($.eventName = \\\"DeletePolicyVersion\\\") || ($.eventName = \\\"AttachRolePolicy\\\") || ($.eventName = \\\"DetachRolePolicy\\\") || ($.eventName = \\\"AttachUserPolicy\\\") || ($.eventName = \\\"DetachUserPolicy\\\") || ($.eventName = \\\"AttachGroupPolicy\\\") || ($.eventName = \\\"DetachGroupPolicy\\\") }" },
+    { name = "CloudTrailChanges", pattern = "{ ($.eventName = \\\"StopLogging\\\") || ($.eventName = \\\"DeleteTrail\\\") }" },
+    { name = "ConsoleLoginFailures", pattern = "{ ($.eventName = \\\"ConsoleLogin\\\") && ($.errorMessage = \\\"Failed authentication\\\") }" },
+    { name = "UnauthorizedAPICalls", pattern = "{ $.errorCode = \\\"*UnauthorizedOperation\\\" || $.errorCode = \\\"AccessDenied*\\\" }" },
+    { name = "SecurityGroupChanges", pattern = "{ ($.eventName = \\\"AuthorizeSecurityGroupIngress\\\") || ($.eventName = \\\"AuthorizeSecurityGroupEgress\\\") || ($.eventName = \\\"RevokeSecurityGroupIngress\\\") || ($.eventName = \\\"RevokeSecurityGroupEgress\\\") }" },
+    { name = "NetworkACLChanges", pattern = "{ ($.eventName = \\\"CreateNetworkAcl\\\") || ($.eventName = \\\"CreateNetworkAclEntry\\\") || ($.eventName = \\\"DeleteNetworkAcl\\\") || ($.eventName = \\\"DeleteNetworkAclEntry\\\") || ($.eventName = \\\"ReplaceNetworkAclEntry\\\") || ($.eventName = \\\"ReplaceNetworkAclAssociation\\\") }" },
+    { name = "NetworkGatewayChanges", pattern = "{ ($.eventName = \\\"CreateCustomerGateway\\\") || ($.eventName = \\\"DeleteCustomerGateway\\\") || ($.eventName = \\\"AttachInternetGateway\\\") || ($.eventName = \\\"CreateInternetGateway\\\") || ($.eventName = \\\"DeleteInternetGateway\\\") || ($.eventName = \\\"DetachInternetGateway\\\") }" },
+    { name = "RouteTableChanges", pattern = "{ ($.eventName = \\\"CreateRouteTable\\\") || ($.eventName = \\\"DeleteRouteTable\\\") || ($.eventName = \\\"ReplaceRouteTableAssociation\\\") || ($.eventName = \\\"CreateRoute\\\") || ($.eventName = \\\"ReplaceRoute\\\") || ($.eventName = \\\"DeleteRoute\\\") }" },
+    { name = "VpcChanges", pattern = "{ ($.eventName = \\\"CreateVpc\\\") || ($.eventName = \\\"DeleteVpc\\\") || ($.eventName = \\\"ModifyVpcAttribute\\\") || ($.eventName = \\\"AcceptVpcPeeringConnection\\\") || ($.eventName = \\\"CreateVpcPeeringConnection\\\") || ($.eventName = \\\"DeleteVpcPeeringConnection\\\") }" },
+    { name = "EC2InstanceChanges", pattern = "{ ($.eventName = \\\"RunInstances\\\") || ($.eventName = \\\"TerminateInstances\\\") || ($.eventName = \\\"StopInstances\\\") || ($.eventName = \\\"StartInstances\\\") }" },
+    { name = "KMSKeyChanges", pattern = "{ ($.eventSource = \\\"kms.amazonaws.com\\\") && (($.eventName = \\\"DisableKey\\\") || ($.eventName = \\\"ScheduleKeyDeletion\\\")) }" },
+    { name = "S3BucketPolicyChanges", pattern = "{ ($.eventName = \\\"PutBucketPolicy\\\") || ($.eventName = \\\"DeleteBucketPolicy\\\") }" },
+    { name = "AWSConfigChanges", pattern = "{ ($.eventSource = \\\"config.amazonaws.com\\\") && (($.eventName = \\\"StopConfigurationRecorder\\\") || ($.eventName = \\\"DeleteDeliveryChannel\\\")) }" }
   ]
 }
+
 
 # Creating cloudwatch log group metric filters
 
