@@ -74,3 +74,20 @@ resource "aws_cloudwatch_log_metric_filter" "filters" {
     value     = "1"
   }
 }
+
+# Creating cloudwatch alarms for custom metrics
+
+resource "aws_cloudwatch_metric_alarm" "alarms" {
+  for_each = aws_cloudwatch_log_metric_filter.filters
+
+  alarm_name          = "${each.key}_alarm"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  metric_name         = each.key
+  namespace           = "SecurityMetrics"
+  period              = 300
+  statistic           = "Sum"
+  threshold           = 1
+  alarm_description   = "Alarm for ${each.key} metric"
+  alarm_actions       = var.sns_topic_arn
+}
