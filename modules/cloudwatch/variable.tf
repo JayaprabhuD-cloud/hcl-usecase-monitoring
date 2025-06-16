@@ -3,3 +3,8 @@ variable "cloudtrail_log_group_name" {
   type = string
   default = "bayer-demo-cloudtrail-log-group"
 }
+
+variable "sns_topic_arn" {
+  description = "sns topic arn variable"
+  type = list(string)
+}
