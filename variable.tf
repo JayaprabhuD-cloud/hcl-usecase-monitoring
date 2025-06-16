@@ -16,10 +16,10 @@ variable "retention" {
   default = 7
 }
 
-variable "sns_topic_arn" {
-  description = "sns topic arn variable"
-  type = string
-}
+#variable "sns_topic_arn" {
+#  description = "sns topic arn variable"
+#  type = string
+#}
 
 variable "sns_topic_name" {
   description = "SNS topic name"
