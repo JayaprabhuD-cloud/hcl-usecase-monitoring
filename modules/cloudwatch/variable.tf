@@ -1,3 +1,16 @@
+variable "cloudtrail_name" {
+  description = "Name of the cloudtrail"
+  type = string
+  default = "jp-demo-multi-region-trail"
+}
+
+variable "cloudtrail_bucket_name" {
+  description = "Name of the s3 bucket"
+  type = string
+}
+
+
+
 variable "cloudtrail_log_group_name" {
   description = "cloudtrail log group name"
   type = string
