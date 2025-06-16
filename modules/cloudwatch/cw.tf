@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_log_group" "cloudtrail_log_group" {
   name              = var.cloudtrail_log_group_name
-  retention_in_days = 90
+  retention_in_days = var.retention
 }
 
 # Creating IAM role for Cloudtrail

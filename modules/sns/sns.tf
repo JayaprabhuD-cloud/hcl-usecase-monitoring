@@ -7,8 +7,3 @@ resource "aws_sns_topic_subscription" "email_subscription" {
   protocol  = "email"
   endpoint  = "jayaprabhu.dheen@hcltech.com"
 }
-
-output "sns_topic_arn" {
-  description = "The ARN of the SNS topic"
-  value       = aws_sns_topic.cloudtrail_alarms.arn
-}
