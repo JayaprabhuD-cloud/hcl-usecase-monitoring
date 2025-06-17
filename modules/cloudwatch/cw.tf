@@ -5,8 +5,8 @@
 
 
 resource "aws_cloudwatch_log_group" "cloudtrail" {
-  name              = var.cloudtrail_log_group_name
-  retention_in_days = var.retention
+  name              = "/aws/usecase/demo/monitoring"
+  retention_in_days = 7
 }
 
 resource "aws_cloudtrail" "main" {

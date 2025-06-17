@@ -10,11 +10,10 @@ variable "cloudtrail_log_group_name" {
   default = "bayer-demo-cloudtrail-log-group"
 }
 
-variable "retention" {
-  description = "logs retention days"
-  type = number
-  default = 7
-}
+#variable "retention" {
+#  description = "logs retention days"
+#  type = number
+#}
 
 #variable "sns_topic_arn" {
 #  description = "sns topic arn variable"
