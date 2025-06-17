@@ -98,44 +98,44 @@ resource "aws_iam_role_policy" "cloudtrail_policy" {
 #}
 
 
-# 1. Root user usage
-resource "aws_cloudwatch_log_metric_filter" "RootUsage" {
-  name           = "RootUsage"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ $.userIdentity.type = \"Root\" && $.userIdentity.invokedBy NOT EXISTS }"
+## 1. Root user usage
+#resource "aws_cloudwatch_log_metric_filter" "RootUsage" {
+#  name           = "RootUsage"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ $.userIdentity.type = \"Root\" && $.userIdentity.invokedBy NOT EXISTS }"
+#
+#  metric_transformation {
+#    name      = "RootUsage"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
-  metric_transformation {
-    name      = "RootUsage"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 2. Console login failures
+#resource "aws_cloudwatch_log_metric_filter" "ConsoleLoginFailures" {
+#  name           = "ConsoleLoginFailures"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ $.eventName = \"ConsoleLogin\" && $.responseElements.ConsoleLogin = \"Failure\" }"
+#
+#  metric_transformation {
+#    name      = "ConsoleLoginFailures"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
-# 2. Console login failures
-resource "aws_cloudwatch_log_metric_filter" "ConsoleLoginFailures" {
-  name           = "ConsoleLoginFailures"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ $.eventName = \"ConsoleLogin\" && $.responseElements.ConsoleLogin = \"Failure\" }"
-
-  metric_transformation {
-    name      = "ConsoleLoginFailures"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
-
-# 3. IAM policy changes
-resource "aws_cloudwatch_log_metric_filter" "IAMPolicyChanges" {
-  name           = "IAMPolicyChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventName = \"PutGroupPolicy\") || ($.eventName = \"PutRolePolicy\") || ($.eventName = \"PutUserPolicy\") || ($.eventName = \"DeleteGroupPolicy\") || ($.eventName = \"DeleteRolePolicy\") || ($.eventName = \"DeleteUserPolicy\") || ($.eventName = \"CreatePolicy\") || ($.eventName = \"DeletePolicy\") || ($.eventName = \"CreatePolicyVersion\") || ($.eventName = \"DeletePolicyVersion\") || ($.eventName = \"AttachRolePolicy\") || ($.eventName = \"DetachRolePolicy\") || ($.eventName = \"AttachUserPolicy\") || ($.eventName = \"DetachUserPolicy\") || ($.eventName = \"AttachGroupPolicy\") || ($.eventName = \"DetachGroupPolicy\") }"
-
-  metric_transformation {
-    name      = "IAMPolicyChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 3. IAM policy changes
+#resource "aws_cloudwatch_log_metric_filter" "IAMPolicyChanges" {
+#  name           = "IAMPolicyChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventName = \"PutGroupPolicy\") || ($.eventName = \"PutRolePolicy\") || ($.eventName = \"PutUserPolicy\") || ($.eventName = \"DeleteGroupPolicy\") || ($.eventName = \"DeleteRolePolicy\") || ($.eventName = \"DeleteUserPolicy\") || ($.eventName = \"CreatePolicy\") || ($.eventName = \"DeletePolicy\") || ($.eventName = \"CreatePolicyVersion\") || ($.eventName = \"DeletePolicyVersion\") || ($.eventName = \"AttachRolePolicy\") || ($.eventName = \"DetachRolePolicy\") || ($.eventName = \"AttachUserPolicy\") || ($.eventName = \"DetachUserPolicy\") || ($.eventName = \"AttachGroupPolicy\") || ($.eventName = \"DetachGroupPolicy\") }"
+#
+#  metric_transformation {
+#    name      = "IAMPolicyChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
 # 4. CloudTrail configuration changes
 resource "aws_cloudwatch_log_metric_filter" "CloudTrailChanges" {
@@ -150,18 +150,18 @@ resource "aws_cloudwatch_log_metric_filter" "CloudTrailChanges" {
   }
 }
 
-# 5. AWS Config changes
-resource "aws_cloudwatch_log_metric_filter" "AWSConfigChanges" {
-  name           = "AWSConfigChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventSource = \"config.amazonaws.com\") && ($.eventName = \"StopConfigurationRecorder\" || $.eventName = \"DeleteDeliveryChannel\") }"
-
-  metric_transformation {
-    name      = "AWSConfigChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 5. AWS Config changes
+#resource "aws_cloudwatch_log_metric_filter" "AWSConfigChanges" {
+#  name           = "AWSConfigChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventSource = \"config.amazonaws.com\") && ($.eventName = \"StopConfigurationRecorder\" || $.eventName = \"DeleteDeliveryChannel\") }"
+#
+#  metric_transformation {
+#    name      = "AWSConfigChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
 # 6. Security group changes
 resource "aws_cloudwatch_log_metric_filter" "SecurityGroupChanges" {
@@ -176,70 +176,70 @@ resource "aws_cloudwatch_log_metric_filter" "SecurityGroupChanges" {
   }
 }
 
-# 7. Network ACL changes
-resource "aws_cloudwatch_log_metric_filter" "NetworkACLChanges" {
-  name           = "NetworkACLChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventName = \"CreateNetworkAcl\") || ($.eventName = \"CreateNetworkAclEntry\") || ($.eventName = \"DeleteNetworkAcl\") || ($.eventName = \"DeleteNetworkAclEntry\") || ($.eventName = \"ReplaceNetworkAclEntry\") || ($.eventName = \"ReplaceNetworkAclAssociation\") }"
+## 7. Network ACL changes
+#resource "aws_cloudwatch_log_metric_filter" "NetworkACLChanges" {
+#  name           = "NetworkACLChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventName = \"CreateNetworkAcl\") || ($.eventName = \"CreateNetworkAclEntry\") || ($.eventName = \"DeleteNetworkAcl\") || ($.eventName = \"DeleteNetworkAclEntry\") || ($.eventName = \"ReplaceNetworkAclEntry\") || ($.eventName = \"ReplaceNetworkAclAssociation\") }"
+#
+#  metric_transformation {
+#    name      = "NetworkACLChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
-  metric_transformation {
-    name      = "NetworkACLChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 8. Route table changes
+#resource "aws_cloudwatch_log_metric_filter" "RouteTableChanges" {
+#  name           = "RouteTableChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventName = \"CreateRouteTable\") || ($.eventName = \"DeleteRouteTable\") || ($.eventName = \"ReplaceRouteTableAssociation\") || ($.eventName = \"CreateRoute\") || ($.eventName = \"ReplaceRoute\") || ($.eventName = \"DeleteRoute\") }"
+#
+#  metric_transformation {
+#    name      = "RouteTableChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
-# 8. Route table changes
-resource "aws_cloudwatch_log_metric_filter" "RouteTableChanges" {
-  name           = "RouteTableChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventName = \"CreateRouteTable\") || ($.eventName = \"DeleteRouteTable\") || ($.eventName = \"ReplaceRouteTableAssociation\") || ($.eventName = \"CreateRoute\") || ($.eventName = \"ReplaceRoute\") || ($.eventName = \"DeleteRoute\") }"
+## 9. VPC changes
+#resource "aws_cloudwatch_log_metric_filter" "VpcChanges" {
+#  name           = "VpcChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventName = \"CreateVpc\") || ($.eventName = \"DeleteVpc\") || ($.eventName = \"ModifyVpcAttribute\") || ($.eventName = \"AcceptVpcPeeringConnection\") || ($.eventName = \"CreateVpcPeeringConnection\") || ($.eventName = \"DeleteVpcPeeringConnection\") }"
+#
+#  metric_transformation {
+#    name      = "VpcChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
-  metric_transformation {
-    name      = "RouteTableChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 10. KMS key changes
+#resource "aws_cloudwatch_log_metric_filter" "KMSKeyChanges" {
+#  name           = "KMSKeyChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventSource = \"kms.amazonaws.com\") && ($.eventName = \"DisableKey\" || $.eventName = \"ScheduleKeyDeletion\") }"
+#
+#  metric_transformation {
+#    name      = "KMSKeyChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
-# 9. VPC changes
-resource "aws_cloudwatch_log_metric_filter" "VpcChanges" {
-  name           = "VpcChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventName = \"CreateVpc\") || ($.eventName = \"DeleteVpc\") || ($.eventName = \"ModifyVpcAttribute\") || ($.eventName = \"AcceptVpcPeeringConnection\") || ($.eventName = \"CreateVpcPeeringConnection\") || ($.eventName = \"DeleteVpcPeeringConnection\") }"
-
-  metric_transformation {
-    name      = "VpcChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
-
-# 10. KMS key changes
-resource "aws_cloudwatch_log_metric_filter" "KMSKeyChanges" {
-  name           = "KMSKeyChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventSource = \"kms.amazonaws.com\") && ($.eventName = \"DisableKey\" || $.eventName = \"ScheduleKeyDeletion\") }"
-
-  metric_transformation {
-    name      = "KMSKeyChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
-
-# 11. EC2 instance changes
-resource "aws_cloudwatch_log_metric_filter" "EC2InstanceChanges" {
-  name           = "EC2InstanceChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventName = \"RunInstances\") || ($.eventName = \"TerminateInstances\") || ($.eventName = \"StopInstances\") || ($.eventName = \"StartInstances\") }"
-
-  metric_transformation {
-    name      = "EC2InstanceChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 11. EC2 instance changes
+#resource "aws_cloudwatch_log_metric_filter" "EC2InstanceChanges" {
+#  name           = "EC2InstanceChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventName = \"RunInstances\") || ($.eventName = \"TerminateInstances\") || ($.eventName = \"StopInstances\") || ($.eventName = \"StartInstances\") }"
+#
+#  metric_transformation {
+#    name      = "EC2InstanceChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
 # 12. Unauthorized API calls
 resource "aws_cloudwatch_log_metric_filter" "UnauthorizedAPICalls" {
@@ -267,59 +267,59 @@ resource "aws_cloudwatch_log_metric_filter" "ConsoleSigninWithoutMFA" {
   }
 }
 
-# 14. S3 bucket policy changes
-resource "aws_cloudwatch_log_metric_filter" "S3BucketPolicyChanges" {
-  name           = "S3BucketPolicyChanges"
-  log_group_name = var.cloudtrail_log_group_name
-  pattern        = "{ ($.eventName = \"PutBucketPolicy\") || ($.eventName = \"DeleteBucketPolicy\") }"
-
-  metric_transformation {
-    name      = "S3BucketPolicyChanges"
-    namespace = "SecurityHub"
-    value     = "1"
-  }
-}
+## 14. S3 bucket policy changes
+#resource "aws_cloudwatch_log_metric_filter" "S3BucketPolicyChanges" {
+#  name           = "S3BucketPolicyChanges"
+#  log_group_name = var.cloudtrail_log_group_name
+#  pattern        = "{ ($.eventName = \"PutBucketPolicy\") || ($.eventName = \"DeleteBucketPolicy\") }"
+#
+#  metric_transformation {
+#    name      = "S3BucketPolicyChanges"
+#    namespace = "SecurityHub"
+#    value     = "1"
+#  }
+#}
 
 # Creating cloudwatch alarms for above metrics
 
-resource "aws_cloudwatch_metric_alarm" "RootUsageAlarm" {
-  alarm_name          = "RootUsageAlarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
-  metric_name         = "RootUsage"
-  namespace           = "SecurityHub"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = 1
-  alarm_description   = "Alarm for root user activity"
-  alarm_actions       = var.sns_topic_arn
-}
+#resource "aws_cloudwatch_metric_alarm" "RootUsageAlarm" {
+#  alarm_name          = "RootUsageAlarm"
+#  comparison_operator = "GreaterThanOrEqualToThreshold"
+#  evaluation_periods  = 1
+#  metric_name         = "RootUsage"
+#  namespace           = "SecurityHub"
+#  period              = 300
+#  statistic           = "Sum"
+#  threshold           = 1
+#  alarm_description   = "Alarm for root user activity"
+#  alarm_actions       = var.sns_topic_arn
+#}
 
-resource "aws_cloudwatch_metric_alarm" "ConsoleLoginFailuresAlarm" {
-  alarm_name          = "ConsoleLoginFailuresAlarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
-  metric_name         = "ConsoleLoginFailures"
-  namespace           = "SecurityHub"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = 1
-  alarm_description   = "Alarm for console login failures"
-  alarm_actions       = var.sns_topic_arn
-}
+#resource "aws_cloudwatch_metric_alarm" "ConsoleLoginFailuresAlarm" {
+#  alarm_name          = "ConsoleLoginFailuresAlarm"
+#  comparison_operator = "GreaterThanOrEqualToThreshold"
+#  evaluation_periods  = 1
+#  metric_name         = "ConsoleLoginFailures"
+#  namespace           = "SecurityHub"
+#  period              = 300
+#  statistic           = "Sum"
+#  threshold           = 1
+#  alarm_description   = "Alarm for console login failures"
+#  alarm_actions       = var.sns_topic_arn
+#}
 
-resource "aws_cloudwatch_metric_alarm" "IAMPolicyChangesAlarm" {
-  alarm_name          = "IAMPolicyChangesAlarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
-  metric_name         = "IAMPolicyChanges"
-  namespace           = "SecurityHub"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = 1
-  alarm_description   = "Alarm for IAM policy changes"
-  alarm_actions       = var.sns_topic_arn
-}
+#resource "aws_cloudwatch_metric_alarm" "IAMPolicyChangesAlarm" {
+#  alarm_name          = "IAMPolicyChangesAlarm"
+#  comparison_operator = "GreaterThanOrEqualToThreshold"
+#  evaluation_periods  = 1
+#  metric_name         = "IAMPolicyChanges"
+#  namespace           = "SecurityHub"
+#  period              = 300
+#  statistic           = "Sum"
+#  threshold           = 1
+#  alarm_description   = "Alarm for IAM policy changes"
+#  alarm_actions       = var.sns_topic_arn
+#}
 
 resource "aws_cloudwatch_metric_alarm" "CloudTrailChangesAlarm" {
   alarm_name          = "CloudTrailChangesAlarm"
@@ -334,18 +334,18 @@ resource "aws_cloudwatch_metric_alarm" "CloudTrailChangesAlarm" {
   alarm_actions       = var.sns_topic_arn
 }
 
-resource "aws_cloudwatch_metric_alarm" "AWSConfigChangesAlarm" {
-  alarm_name          = "AWSConfigChangesAlarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
-  metric_name         = "AWSConfigChanges"
-  namespace           = "SecurityHub"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = 1
-  alarm_description   = "Alarm for AWS Config changes"
-  alarm_actions       = var.sns_topic_arn
-}
+#resource "aws_cloudwatch_metric_alarm" "AWSConfigChangesAlarm" {
+#  alarm_name          = "AWSConfigChangesAlarm"
+#  comparison_operator = "GreaterThanOrEqualToThreshold"
+#  evaluation_periods  = 1
+#  metric_name         = "AWSConfigChanges"
+#  namespace           = "SecurityHub"
+#  period              = 300
+#  statistic           = "Sum"
+#  threshold           = 1
+#  alarm_description   = "Alarm for AWS Config changes"
+#  alarm_actions       = var.sns_topic_arn
+#}
 
 resource "aws_cloudwatch_metric_alarm" "SecurityGroupChangesAlarm" {
   alarm_name          = "SecurityGroupChangesAlarm"
@@ -360,18 +360,18 @@ resource "aws_cloudwatch_metric_alarm" "SecurityGroupChangesAlarm" {
   alarm_actions       = var.sns_topic_arn
 }
 
-resource "aws_cloudwatch_metric_alarm" "NetworkACLChangesAlarm" {
-  alarm_name          = "NetworkACLChangesAlarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
-  metric_name         = "NetworkACLChanges"
-  namespace           = "SecurityHub"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = 1
-  alarm_description   = "Alarm for network ACL changes"
-  alarm_actions       = var.sns_topic_arn
-}
+#resource "aws_cloudwatch_metric_alarm" "NetworkACLChangesAlarm" {
+#  alarm_name          = "NetworkACLChangesAlarm"
+#  comparison_operator = "GreaterThanOrEqualToThreshold"
+#  evaluation_periods  = 1
+#  metric_name         = "NetworkACLChanges"
+#  namespace           = "SecurityHub"
+#  period              = 300
+#  statistic           = "Sum"
+#  threshold           = 1
+#  alarm_description   = "Alarm for network ACL changes"
+#  alarm_actions       = var.sns_topic_arn
+#}
 
 resource "aws_cloudwatch_metric_alarm" "RouteTableChangesAlarm" {
   alarm_name          = "RouteTableChangesAlarm"
