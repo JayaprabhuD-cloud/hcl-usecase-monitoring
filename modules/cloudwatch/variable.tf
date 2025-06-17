@@ -1,3 +1,9 @@
+variable "cloudtrail_log_group_name" {
+  description = "cloudtrail log group name"
+  type = string
+  default = "bayer-demo-cloudtrail-log-group"
+}
+
 variable "cloudtrail_name" {
   description = "Name of the cloudtrail"
   type = string
@@ -12,11 +18,7 @@ variable "cloudtrail_bucket_name" {
 
 
 
-variable "cloudtrail_log_group_name" {
-  description = "cloudtrail log group name"
-  type = string
-  default = "bayer-demo-cloudtrail-log-group"
-}
+
 
 variable "sns_topic_arn" {
   description = "sns topic arn variable"

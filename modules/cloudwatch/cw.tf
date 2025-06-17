@@ -1,3 +1,17 @@
+# Creating multi region cloudtrail
+
+resource "aws_cloudtrail" "main" {
+  name                          = var.cloudtrail_name
+  s3_bucket_name                = var.cloudtrail_bucket_name
+  cloud_watch_logs_group_arn   = aws_cloudwatch_log_group.cloudtrail_log_group.arn
+  cloud_watch_logs_role_arn    = aws_iam_role.cloudtrail_role.arn
+  include_global_service_events = true
+  is_multi_region_trail        = true
+  enable_log_file_validation   = true
+  enable_logging               = true
+}
+
+
 resource "aws_cloudwatch_log_group" "cloudtrail_log_group" {
   name              = var.cloudtrail_log_group_name
   retention_in_days = var.retention
@@ -39,6 +53,8 @@ resource "aws_iam_role_policy" "cloudtrail_policy" {
     }]
   })
 }
+
+
 
 #locals {
 #  metrics = [
@@ -462,18 +478,5 @@ resource "aws_cloudwatch_metric_alarm" "S3BucketPolicyChangesAlarm" {
 #  alarm_actions       = [var.sns_topic_arn]
 #}
 
-
-# Creating multi region cloudtrail
-
-resource "aws_cloudtrail" "main" {
-  name                          = var.cloudtrail_name
-  s3_bucket_name                = var.cloudtrail_bucket_name
-  cloud_watch_logs_group_arn   = aws_cloudwatch_log_group.cloudtrail_log_group.arn
-  cloud_watch_logs_role_arn    = aws_iam_role.cloudtrail_role.arn
-  include_global_service_events = true
-  is_multi_region_trail        = true
-  enable_log_file_validation   = true
-  enable_logging               = true
-}
 
 
