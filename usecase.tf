@@ -12,7 +12,7 @@ module "cloudwatch" {
   source      = "./modules/cloudwatch"
   cloudtrail_log_group_name     = var.cloudtrail_log_group_name
   retention = var.retention
-  sns_topic_arn = module.sns.sns_topic_arn
+  sns_topic_arn = [module.sns.sns_topic_arn]
   cloudtrail_name  = var.cloudtrail_name
   cloudtrail_bucket_name = var.cloudtrail_bucket_name
 }
