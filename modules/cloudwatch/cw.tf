@@ -9,6 +9,9 @@ resource "aws_cloudtrail" "main" {
   is_multi_region_trail        = true
   enable_log_file_validation   = true
   enable_logging               = true
+ 
+depends_on = [aws_cloudwatch_log_group.cloudtrail]
+
 }
 
 
