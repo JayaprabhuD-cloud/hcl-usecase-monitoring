@@ -1,8 +1,8 @@
-variable "cloudtrail_log_group_name" {
-  description = "cloudtrail log group name"
-  type = string
-  default = "bayer-demo-cloudtrail-log-group"
-}
+#variable "cloudtrail_log_group_name" {
+#  description = "cloudtrail log group name"
+#  type = string
+#  default = "bayer-demo-cloudtrail-log-group"
+#}
 
 variable "cloudtrail_name" {
   description = "Name of the cloudtrail"
