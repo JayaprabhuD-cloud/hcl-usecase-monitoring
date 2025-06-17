@@ -12,7 +12,7 @@ resource "aws_cloudtrail" "main" {
   include_global_service_events = true
   is_multi_region_trail         = true
   enable_log_file_validation    = true
-  cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.cloudtrail.arn}:*"
+  cloud_watch_logs_group_arn    = aws_cloudwatch_log_group.cloudtrail_log_group.arn
   cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_role.arn
 
   depends_on = [aws_cloudwatch_log_group.cloudtrail]
