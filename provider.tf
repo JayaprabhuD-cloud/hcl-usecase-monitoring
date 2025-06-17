@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "bayer-new-terraform-remote-state-bucket"
+    bucket = "terraform-remote-state-bucket-s3-hcl"
     key    = "usecase-11/terraform.tfstate"
     region = "us-east-1" 
     use_lockfile = true   
