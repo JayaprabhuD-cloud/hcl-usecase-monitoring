@@ -4,11 +4,11 @@ variable "cloudtrail_bucket_name" {
   default = "bayer-demo-cloudtrail-logs"
 }
 
-variable "cloudtrail_log_group_name" {
-  description = "cloudtrail log group name"
-  type = string
-  default = "bayer-demo-cloudtrail-log-group"
-}
+#variable "cloudtrail_log_group_name" {
+#  description = "cloudtrail log group name"
+#  type = string
+#  default = "bayer-demo-cloudtrail-log-group"
+#}
 
 #variable "retention" {
 #  description = "logs retention days"
