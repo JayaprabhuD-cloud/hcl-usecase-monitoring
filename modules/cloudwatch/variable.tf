@@ -1,8 +1,8 @@
-#variable "cloudtrail_log_group_name" {
-#  description = "cloudtrail log group name"
-#  type = string
-#  default = "bayer-demo-cloudtrail-log-group"
-#}
+variable "cloudtrail_log_group_name" {
+  description = "cloudtrail log group name"
+  type = string
+  default = "bayer-demo-cloudtrail-log-group"
+}
 
 variable "cloudtrail_name" {
   description = "Name of the cloudtrail"
@@ -28,4 +28,5 @@ variable "sns_topic_arn" {
 variable "retention" {
   description = "logs retention days"
   type = number
+  default = 7
 }
