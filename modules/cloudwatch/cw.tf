@@ -90,7 +90,7 @@ resource "aws_cloudwatch_metric_alarm" "alarms" {
   statistic           = "Sum"
   threshold           = 1
   alarm_description   = "Alarm for ${each.key} metric"
-  alarm_actions       = var.sns_topic_arn
+  alarm_actions       = [var.sns_topic_arn]
 }
 
 

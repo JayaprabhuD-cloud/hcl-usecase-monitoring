@@ -6,7 +6,8 @@ variable "cloudtrail_name" {
 
 variable "cloudtrail_bucket_name" {
   description = "Name of the s3 bucket"
-  type = list(string)
+  type = string
+  default = "bayer-demo-cloudtrail-logs"
 }
 
 
@@ -19,7 +20,7 @@ variable "cloudtrail_log_group_name" {
 
 variable "sns_topic_arn" {
   description = "sns topic arn variable"
-  type = string
+  type = list(string)
 }
 
 variable "retention" {
